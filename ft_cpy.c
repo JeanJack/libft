@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_strsplit.c                                    .::    .:/ .      .::   */
+/*   ft_cpy.c                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: manquez <marvin@le-101.fr>                 +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/10/23 07:49:41 by manquez      #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/23 17:20:45 by manquez     ###    #+. /#+    ###.fr     */
+/*   Created: 2018/10/23 15:07:17 by manquez      #+#   ##    ##    #+#       */
+/*   Updated: 2018/10/23 16:28:29 by manquez     ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,9 +15,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-static int	ft_count_s(const char *s, char c, int i)
+int		ft_count_s(const char *s, char c, int i)
 {
-	int a;
+	int	a;
 
 	a = 0;
 	while (s[i] == c)
@@ -30,32 +30,14 @@ static int	ft_count_s(const char *s, char c, int i)
 	return (a);
 }
 
-static int	ft_count(const char *s, char c)
-{
-	int i;
-	int a;
-
-	i = 0;
-	a = 0;
-	if (s == NULL)
-		return (0);
-	while (s[i])
-	{
-		if (s[i] == c && s[i + 1] != c)
-			a++;
-		i++;
-	}
-	return (a - 1);
-}
-
-static char	*ft_cpy(const char *s, char c, int i)
+char	*ft_cpy(const char *s, char c, int i)
 {
 	char	*tab;
 	int		a;
 
+	a = 0;
 	if (!(tab = (char*)malloc(sizeof(*tab) * (ft_count_s(s, c, i) + 1))))
 		return (NULL);
-	a = 0;
 	while (s[i] != c && s[i])
 	{
 		tab[a] = s[i];
@@ -68,41 +50,15 @@ static char	*ft_cpy(const char *s, char c, int i)
 	return (tab);
 }
 
-char		**ft_strsplit(const char *s, char c)
-{
-	int		i;
-	int		a;
-	int		b;
-	char	**tab;
-
-	i = 0;
-	a = 0;
-	b = ft_count(s, c);
-	if (!(tab = (char**)malloc(sizeof(**tab) * b)))
-		return (NULL);
-	while (s[i] == c && s[i])
-		i++;
-	while (a < b && s[i])
-	{
-		tab[a] = ft_cpy(s, c, i);
-		a++;
-	}
-	tab[a] = NULL;
-	return (tab);
-}
-
 int		main()
 {
-	char **tab;
-	int i;
-	char t[] = "*****test****rien****tes***";
+	int i = 0;
+	char tab[] = "****test***";
+	char *tab1;
 
-	i = 0;
-	tab = ft_strsplit(t, 42);
-	while (tab[i])
-	{
-		printf("%s\n", tab[i]);
+	while (tab[i] == 42)
 		i++;
-	}
+	tab1 = ft_cpy(tab, 42, i);
+	printf("%s", tab1);
 	return (0);
 }
