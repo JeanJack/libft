@@ -15,15 +15,6 @@
 
 void	ft_putendl_fd(char const *s, int fd)
 {
-	size_t i;
-
-	if (s == NULL)
-		return ;
-	i = 0;
-	while (s[i])
-	{
-		ft_putchar_fd(s[i], fd);
-		i++;
-	}
+	ft_putstr_fd((char *)s, fd);
 	ft_putchar_fd('\n', fd);
 }
